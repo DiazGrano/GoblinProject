@@ -190,10 +190,11 @@ public class Tile : MonoBehaviour/*, IPointerDownHandler, IPointerEnterHandler *
             {
                 GameManager.sharedInstance.visibleTiles.Remove(this);
             }
+
+            if (GameManager.sharedInstance.environmentManager == null) { return; }
+
+            GameManager.sharedInstance.environmentManager.SetVisible(GameObjectType.Tile, this.gameObject, false);
         }
-        GameManager.sharedInstance.environmentManager.SetVisible(GameObjectType.Tile, this.gameObject, false);
-
-
     }
 
     private void OnBecameVisible()
@@ -221,13 +222,11 @@ public class Tile : MonoBehaviour/*, IPointerDownHandler, IPointerEnterHandler *
                 this.selfDisabled = false;
                 this.SetTileState(TileState.Enabled);
             }
+
+            if (GameManager.sharedInstance.environmentManager == null) { return; }
+
+            GameManager.sharedInstance.environmentManager.SetVisible(GameObjectType.Tile, this.gameObject, true);
         }
-
-
-        GameManager.sharedInstance.environmentManager.SetVisible(GameObjectType.Tile, this.gameObject, true);
-
-
-
     }
 
 

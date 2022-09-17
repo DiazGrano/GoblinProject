@@ -29,6 +29,9 @@ public class ObjectVisibilityHelper : MonoBehaviour
                 if (this.cController)
                 {
                     this.gManager.visibleCharacters.Add(this.cController);
+
+                    if (GameManager.sharedInstance.environmentManager == null) { return; }
+
                     GameManager.sharedInstance.environmentManager.SetVisible(objectType, this.cController.gameObject, true);
                 }
                 break;
@@ -36,6 +39,9 @@ public class ObjectVisibilityHelper : MonoBehaviour
                 if (this.eObject)
                 {
                     this.gManager.visibleEnvironmentObjects.Add(this.eObject);
+
+                    if (GameManager.sharedInstance.environmentManager == null) { return; }
+
                     GameManager.sharedInstance.environmentManager.SetVisible(objectType, this.eObject.gameObject, true);
                 }
                 break;
@@ -52,10 +58,16 @@ public class ObjectVisibilityHelper : MonoBehaviour
                 break;
             case GameObjectType.Character:
                 this.gManager.visibleCharacters.Remove(this.cController);
+
+                if (GameManager.sharedInstance.environmentManager == null) { return; }
+
                 GameManager.sharedInstance.environmentManager.SetVisible(objectType, this.cController.gameObject, false);
                 break;
             case GameObjectType.Environment:
                 this.gManager.visibleEnvironmentObjects.Remove(this.eObject);
+
+                if (GameManager.sharedInstance.environmentManager == null) { return; }
+
                 GameManager.sharedInstance.environmentManager.SetVisible(objectType, this.eObject.gameObject, false);
                 break;
         }

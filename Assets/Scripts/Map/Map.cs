@@ -40,7 +40,7 @@ public class Map : MonoBehaviour
     }
     private void Start()
     {
-        //this.SetMapMatrix();
+        this.SetMapMatrix();
     }
 
     public MapMatrix SetMapMatrix()

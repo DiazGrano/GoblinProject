@@ -35,12 +35,15 @@ public class EnvironmentObject : MonoBehaviour
     }
     private void OnBecameVisible()
     {
+        if (GameManager.sharedInstance.environmentManager == null) { return; }
+
         GameManager.sharedInstance.environmentManager.SetVisible(GameObjectType.Environment, this.gameObject, true);
     }
 
     private void OnBecameInvisible()
     {
-        GameManager.sharedInstance.environmentManager.SetVisible(GameObjectType.Environment, this.gameObject, false);
+        if (GameManager.sharedInstance.environmentManager == null) { return; }
 
+        GameManager.sharedInstance.environmentManager.SetVisible(GameObjectType.Environment, this.gameObject, false);
     }
 }
