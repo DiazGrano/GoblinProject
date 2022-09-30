@@ -116,4 +116,13 @@ public class Map : MonoBehaviour
 
         Debug.Log("Matrix de personajes cargada con éxito");
     }
+
+    public void SetPlayerToSpawn(GameObject player)
+    {
+        if (this.spawnTile != null) {
+            player.transform.SetParent(this.Characters.transform);
+            this.mapMatrix.SetObjectAt(this.mapMatrix.GetObjectPosition(GameObjectType.Character, player), GameObjectType.Character, player);
+            player.GetComponent<CharController>().currentTile = this.mapMatrix.GetTileAt(this.mapMatrix.GetObjectPosition(GameObjectType.Character, player));
+        }
+    }
 }

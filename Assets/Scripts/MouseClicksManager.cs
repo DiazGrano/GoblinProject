@@ -32,7 +32,7 @@ public class MouseClicksManager : MonoBehaviour
     private void Start()
     {
         this.gameManager = GameManager.sharedInstance;
-        this.player = GameManager.sharedInstance.currentPlayer.GetComponent<Player>();
+        this.GetPlayerInstance();
         this.cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         this.turnsManager = TurnsManager.sharedInstance;
         this.fightsManager = FightsManager.sharedInstance;
@@ -88,6 +88,9 @@ public class MouseClicksManager : MonoBehaviour
 
     private void PointerClicked(Click click)
     {
+        this.GetPlayerInstance();
+
+
         if (this.selectedCharOptions.characterOptionsOpen())
         {
             this.selectedCharOptions.ForceClose();
@@ -176,6 +179,8 @@ public class MouseClicksManager : MonoBehaviour
     }
     private void ColliderClicked(Click click, RaycastHit2D hit)
     {
+        this.GetPlayerInstance();
+
         CharController selectedCharacter = null;
         switch (hit.collider.tag)
         {
@@ -277,4 +282,18 @@ public class MouseClicksManager : MonoBehaviour
         return results.Count > 0;
     }
 
+
+
+    private void GetPlayerInstance()
+    {
+        if (this.player != null)
+        {
+            return;
+        }
+        if (GameManager.sharedInstance.currentPlayer == null)
+        {
+            return;
+        }
+        this.player = GameManager.sharedInstance.currentPlayer;
+    }
 }

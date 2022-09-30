@@ -38,6 +38,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,9 +56,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
+  dayState: 0
   showGrid: 0
   mapTileMatrix: {fileID: 0}
   currentMap: {fileID: 0}
+  playerPrefab: {fileID: 7657595898686693677, guid: 040e37f5638dccd4f9c3d71f6c4ac1c9,
+    type: 3}
   currentPlayer: {fileID: 0}
   fpsText: {fileID: 0}
   averagefpsText: {fileID: 0}
@@ -65,10 +69,15 @@ MonoBehaviour:
   spritesAlpha: 150
   transparentSprites: 0
   visibleTiles: []
+  visibleCharacters: []
+  visibleEnvironmentObjects: []
   highlightPrefab: {fileID: 7362243135814050376, guid: 5cce3d19d48c24a42a7b0df73bab53a0,
     type: 3}
   disabledHighlightsList: []
   enabledHighlightsList: []
+  uiManager: {fileID: 0}
+  mouseClicksManager: {fileID: 0}
+  environmentManager: {fileID: 0}
 --- !u!114 &2248048572406411176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,8 +95,10 @@ MonoBehaviour:
   startingTilesAmount: 4
   barriersPrefabsList:
   - {fileID: 8028924961855965557, guid: fc06fe637c787a545898c74f4000ffb5, type: 3}
+  battlefield: []
   instantiatedBarriersList: []
   currentBarriersList: []
+  disabledTiles: []
 --- !u!114 &9179729894927489739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648563749228c5f4db5cdc946d5e90c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diagonalEnabled: 1
+  diagonalEnabled: 0
   maxSteps: 100
   currentSteps: 0
   pathColor: {r: 0.42608145, g: 0.754717, b: 0, a: 1}
@@ -157,6 +168,7 @@ MonoBehaviour:
     type: 3}
   currentCharacterTurn: {fileID: 0}
   nextCharacter: 0
+  resourceCostOptions: {fileID: 0}
 --- !u!114 &2005527568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +265,10 @@ MonoBehaviour:
   outterCloudColor: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 1}
   middlerCloudColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   centerCloudColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
-  moveCloudsEvery: 0.5
-  yAxisModifier: 0
-  perlinNoiseScale: 0.1
+  darkestCloudColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+  cloudColorDegradation: 0.05
+  moveCloudsEvery: 0.27
+  perlinNoiseScale: 0.122
+  modifiedTiles: []
+  modifiedCharacters: []
+  modifiedEnvironmentObjects: []

@@ -51,18 +51,17 @@ public class SelectedCharacterOptions : MonoBehaviour
             }
         }
 
-        if (this.player == null)
-        {
-            this.player = GameManager.sharedInstance.currentPlayer.GetComponent<Player>();
-        }
+        this.GetPlayerInstance();
     }
 
     public void LaunchFight()
     {
-
-        this.player.TargetCharacterClicked(this.selectedCharacter);
-        //this.fManager.LaunchFight(this.selectedCharacter);
-        this.ShowSelectedCharacterOptions();
+        if (this.GetPlayerInstance())
+        {
+            this.player.TargetCharacterClicked(this.selectedCharacter);
+            //this.fManager.LaunchFight(this.selectedCharacter);
+            this.ShowSelectedCharacterOptions();
+        }
     }
     public void Cancel()
     {
@@ -97,5 +96,22 @@ public class SelectedCharacterOptions : MonoBehaviour
         
         this.selectedCharacter = selectedCharacter;
         //this.optionsCanvas.enabled = this.showOptions;
+    }
+
+    private bool GetPlayerInstance()
+    {
+        if (this.player != null)
+        {
+            return true;
+        }
+
+        if (GameManager.sharedInstance.currentPlayer == null)
+        {
+            return false;
+        }
+
+        this.player = GameManager.sharedInstance.currentPlayer;
+
+        return true;
     }
 }

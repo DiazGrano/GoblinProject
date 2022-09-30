@@ -233,7 +233,10 @@ public class CharController : MonoBehaviour
         }
         if (this.currentGroup == null)
         {
-            this.gameObject.GetComponentInParent<CharactersGroup>().SetGroup();
+            if (this.gameObject.GetComponentInParent<CharactersGroup>())
+            {
+                this.gameObject.GetComponentInParent<CharactersGroup>().SetGroup();
+            }
         }
     }
 

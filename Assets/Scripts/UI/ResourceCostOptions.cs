@@ -59,7 +59,8 @@ public class ResourceCostOptions : MonoBehaviour
                 Debug.Log("Error: No se ha encontrado un canvas de opciones de hechizo");
             }
         }
-        this.player = GameManager.sharedInstance.currentPlayer.GetComponent<Player>();
+
+        this.GetPlayerInstance();
 
         if (this.spellOptionsCanvas != null)
         {
@@ -85,6 +86,8 @@ public class ResourceCostOptions : MonoBehaviour
 
     public void ShowSpellCastOptions(CharacterResourceType type, int resourceCost, Tile tile, bool show = true)
     {
+        this.GetPlayerInstance();
+
         this.selectedTile = tile;
         this.resourceCost = resourceCost;
         cost = resourceCost;
@@ -138,6 +141,8 @@ public class ResourceCostOptions : MonoBehaviour
 
     public void TriggerAction(bool proceed)
     {
+        this.GetPlayerInstance();
+
         switch (this.resourceType)
         {
             case CharacterResourceType.MaxHealthPoints:
@@ -179,5 +184,18 @@ public class ResourceCostOptions : MonoBehaviour
 
     }
 
+
+    private void GetPlayerInstance()
+    {
+        if (this.player != null)
+        {
+            return;
+        }
+        if (GameManager.sharedInstance.currentPlayer == null)
+        {
+            return;
+        }
+        this.player = GameManager.sharedInstance.currentPlayer;
+    }
 
 }

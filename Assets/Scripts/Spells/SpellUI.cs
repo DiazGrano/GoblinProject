@@ -31,8 +31,8 @@ public class SpellUI : MonoBehaviour, IPointerClickHandler
             }
             this.spellID = this.spellData.spellId;
         }
-        player = GameManager.sharedInstance.currentPlayer.GetComponent<CharController>();
-        resourceCostOptions = GameManager.sharedInstance.uiManager.resourceCostOptions;
+        this.GetPlayerInstance();
+        this.resourceCostOptions = GameManager.sharedInstance.uiManager.resourceCostOptions;
     }
 
 
@@ -40,6 +40,8 @@ public class SpellUI : MonoBehaviour, IPointerClickHandler
     {
         if (this.spellData != null)
         {
+            this.GetPlayerInstance();
+
             if (GameManager.sharedInstance.gameState == GameState.Fighting && TurnsManager.sharedInstance.IsCharacterTurn(player))
             {
                 //ResourceCostOptions.sharedInstance.ShowSpellCastOptions(0, 0, null, false);
@@ -82,6 +84,7 @@ public class SpellUI : MonoBehaviour, IPointerClickHandler
     {
         if (this.spellData != null)
         {
+            this.GetPlayerInstance();
             if (this.buttonImage != null && this.normalButtonSprite != null)
             {
                 //ResourceCostOptions.sharedInstance.ShowSpellCastOptions(0, 0, null, false);
@@ -96,4 +99,17 @@ public class SpellUI : MonoBehaviour, IPointerClickHandler
         
     }
 
+
+    private void GetPlayerInstance()
+    {
+        if (this.player != null)
+        {
+            return;
+        }
+        if (GameManager.sharedInstance.currentPlayer == null)
+        {
+            return;
+        }
+        this.player = GameManager.sharedInstance.currentPlayer.GetComponent<CharController>();
+    }
 }

@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
 
     public Map currentMap;
 
+    public GameObject playerPrefab;
     public Player currentPlayer;
 
 
@@ -138,7 +139,7 @@ public class GameManager : MonoBehaviour
         sharedInstance = this;
         uiManager = FindObjectOfType(typeof(UIManager)) as UIManager;
         mouseClicksManager = FindObjectOfType(typeof(MouseClicksManager)) as MouseClicksManager;
-        this.currentPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //this.currentPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         this.environmentManager = FindObjectOfType(typeof(EnvironmentManager)) as EnvironmentManager;
         
 
@@ -214,7 +215,10 @@ public class GameManager : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Player"))
         {
-            this.currentPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            GameObject auxPlayer = GameObject.FindGameObjectWithTag("Player");
+            this.currentPlayer = auxPlayer.GetComponent<Player>();
+
+            this.SetPlayerInitialPosition(auxPlayer);
             /*this.currentPlayer.transform.parent.transform.SetParent(this.currentMap.Characters.gameObject.transform);
             if (currentMap.spawnTile != null)
             {
@@ -233,8 +237,16 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("No se ha encontrado un jugador");
+            GameObject auxPlayer = Instantiate(this.playerPrefab);
+            this.currentPlayer = auxPlayer.GetComponent<Player>();
+            this.SetPlayerInitialPosition(auxPlayer);
         }
 
+    }
+
+    private void SetPlayerInitialPosition(GameObject player)
+    {
+        this.currentMap.SetPlayerToSpawn(player);
     }
 
     private void SetObjectsInContainers()
@@ -277,8 +289,6 @@ public class GameManager : MonoBehaviour
 
     public void GetMapMatrix(GameObject map)
     {
-
-        Debug.Log("Nope");
         if (map.GetComponent<Map>())
         {
             Map auxMap = map.GetComponent<Map>();

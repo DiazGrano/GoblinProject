@@ -119,7 +119,11 @@ public class CameraController : MonoBehaviour
 
     private void CameraMovement()
     {
-
+        if (this.target == null)
+        {
+            this.target = GameManager.sharedInstance.currentPlayer.gameObject;
+            return;
+        }
 
         if (GameManager.sharedInstance.gameState == GameState.Normal || GameManager.sharedInstance.gameState == GameState.SettingFight)
         {
